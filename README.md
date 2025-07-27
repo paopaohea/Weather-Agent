@@ -7,7 +7,7 @@
 
 ## 🧠 功能亮点
 
-- 使用大语言模型（如 Qwen-Plus）分析用户请求；
+- 使用大语言模型Qwen-Plus分析用户意图；
 - 识别是否需要调用外部函数获取数据；
 - 通过 `get_weather(city)` 函数模拟外部天气 API；
 - 最终由模型基于函数返回结果，自动给出建议。
@@ -15,7 +15,7 @@
 
 ## ⏳ 环境依赖
 
-1、请确保你已安装以下依赖：
+1、安装以下依赖：
 
 - Python ≥ 3.8
 - `openai` Python SDK（支持 DashScope 接入）
@@ -32,7 +32,7 @@ pip install openai
 1、设置 DashScope API Key（以环境变量方式更安全）：
 
 ```bash
-export DASHSCOPE_API_KEY=sk-xxx   # 请替换为你的真实 API Key
+export DASHSCOPE_API_KEY=sk-xxx   # 这里替换为真实 API Key
 ```
 
 2、执行命令：
@@ -48,3 +48,16 @@ python test.py
 ```
 
 模型将自动调用函数获取天气，并综合判断是否建议带伞。
+
+
+## 🫴借助GPT部分
+
+在调试中发现基于原有的get_weather无法识别中文的城市，因此构建了city_map如下，以识别中英文的城市输入：
+```bash
+city_map = {
+        "beijing": "beijing",
+        "北京": "beijing",
+        "shenzhen": "shenzhen",
+        "深圳": "shenzhen"
+    }
+```
